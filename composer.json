@@ -1,0 +1,24 @@
+{
+    "name": "wandell/ding-dispatch",
+    "description": "Customized service provider of dingding",
+    "type": "sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wandell",
+            "email": "601642462@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0",
+        "guzzlehttp/guzzle": "^6.2",
+        "doctrine/cache": "^1.6",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wandell\\Dispatch\\": "src/"
+        }
+    }
+}

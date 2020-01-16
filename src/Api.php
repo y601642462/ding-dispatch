@@ -58,7 +58,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    public function departmentList($id, $fetch_child = true)
+    public function departmentList($id = 0, $fetch_child = true)
     {
         $data = [
             'access_token' => $this->getAccessToken(),

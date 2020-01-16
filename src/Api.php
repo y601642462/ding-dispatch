@@ -12,7 +12,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    protected function getUser($code)
+    public function getUser($code)
     {
         $data = [
             'access_token' => $this->getAccessToken(),
@@ -27,7 +27,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    protected function getUserInfo($userid)
+    public function getUserInfo($userid)
     {
         $data = [
             'access_token' => $this->getAccessToken(),
@@ -42,7 +42,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    protected function ssoGetUserInfo($code)
+    public function ssoGetUserInfo($code)
     {
         $data = [
             'access_token' => $this->getSsoToken(),
@@ -58,7 +58,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    protected function departmentList($id, $fetch_child = true)
+    public function departmentList($id, $fetch_child = true)
     {
         $data = [
             'access_token' => $this->getAccessToken(),
@@ -80,7 +80,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    protected function userSimplelist($department_id, $offset = null, $size = null, $order = null)
+    public function userSimplelist($department_id, $offset = null, $size = null, $order = null)
     {
         $data = [
             'access_token' => $this->getAccessToken(),
@@ -104,7 +104,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    protected function sendMess($userid_list, $memssage)
+    public function sendMess($userid_list, $memssage)
     {
         $get_data = [
             'access_token' => $this->getAccessToken(),

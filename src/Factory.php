@@ -71,7 +71,7 @@ class Factory
      */
     private function set_cache($name, $value, $expires_in)
     {
-        $cache = new FilesystemCache('cache');
+        $cache = new FilesystemCache('../runtime/cache');
         $res = $cache->save($name, $value, $expires_in);
 
         return $res;

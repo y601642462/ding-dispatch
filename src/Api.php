@@ -118,9 +118,9 @@ class Api extends Factory
         $post_data = [
             'agent_id' => $this->getConfig()['agent_id'],
             'userid_list' => $userid_list,
-            'msg' => json_encode($msg_arr,JSON_UNESCAPED_UNICODE)
+            'msg' => $msg_arr
         ];
-
+        
         return $this->request("/topapi/message/corpconversation/asyncsend_v2" . $this->make_url_query($get_data), $post_data, "post");
     }
 }

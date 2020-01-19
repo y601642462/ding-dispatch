@@ -104,15 +104,21 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    public function sendMess($userid_list, $memssage)
+    public function sendMess($userid_list, $message)
     {
         $get_data = [
             'access_token' => $this->getAccessToken(),
         ];
+        $msg_arr = [
+            "msgtype"=>"text",
+            "text"=>[
+                "content"=>$message
+            ]
+        ];
         $post_data = [
             'agent_id' => $this->getConfig()['agent_id'],
             'userid_list' => $userid_list,
-            'msg' => $memssage
+            'msg' => json_encode($msg_arr,JSON_UNESCAPED_UNICODE)
         ];
 
         return $this->request("/topapi/message/corpconversation/asyncsend_v2" . $this->make_url_query($get_data), $post_data, "post");

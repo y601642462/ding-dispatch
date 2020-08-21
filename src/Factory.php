@@ -37,7 +37,7 @@ class Factory
      * @param int $length
      * @return string
      */
-    private function getSuiteTicket($length = 10)
+    protected function getSuiteTicket($length = 10)
     {
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $str = '';
@@ -134,6 +134,32 @@ class Factory
         $cache->save("access_token", $flag['access_token'], $flag['expires_in'] - 100);
 
         return $flag['access_token'];
+    }
+
+    /**
+     * 获取jsapi_ticket
+     * @return mixed|string
+     * @throws \Exception
+     */
+    protected function getTicket()
+    {
+        $jsapi_ticket = $this->get_cache("jsapi_ticket");
+        if ($jsapi_ticket) {
+            return $jsapi_ticket;
+        }
+        $token = $this->getAccessToken();
+        $url_data = [
+            'access_token'=>$token,
+        ];
+        $res = $this->make_url_query($url_data);
+        $flag = $this->request('get_jsapi_ticket' . $res);
+        if ($flag['errcode'] != 0) {
+            throw new \Exception($flag['errmsg'], $flag['errcode']);
+        }
+        $cache = new FilesystemCache('cache');
+        $cache->save("jsapi_ticket", $flag['ticket'], $flag['expires_in'] - 100);
+
+        return $flag['ticket'];
     }
 
     /**

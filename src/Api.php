@@ -123,4 +123,27 @@ class Api extends Factory
         
         return $this->request("/topapi/message/corpconversation/asyncsend_v2" . $this->make_url_query($get_data), $post_data, "post");
     }
+
+    /**
+     * 获取签名相关信息
+     *
+     * @param string $url
+     *
+     * @return mixed
+     */
+    public function getSignature($url)
+    {
+        $nonceStr = $this->getSuiteTicket();
+        $timeStamp = time();
+        $plain = 'jsapi_ticket=' . $this->getTicket() . '&noncestr=' . $nonceStr . '&timestamp=' . $timeStamp . '&url=' . $url;
+        $signature = sha1($plain);
+        return [
+            'agentId' => $this->getConfig()['agent_id'],
+            'corpId' => $this->getConfig()['auth_corpid'],
+            'timeStamp' => $timeStamp,
+            'nonceStr' => $nonceStr,
+            'signature' => $signature,
+            'url' => $url
+        ];
+    }
 }

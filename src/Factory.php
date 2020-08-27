@@ -143,10 +143,10 @@ class Factory
      */
     protected function getTicket()
     {
-//        $jsapi_ticket = $this->get_cache("jsapi_ticket");
-//        if ($jsapi_ticket) {
-//            return $jsapi_ticket;
-//        }
+        $jsapi_ticket = $this->get_cache("jsapi_ticket");
+        if ($jsapi_ticket) {
+            return $jsapi_ticket;
+        }
         $token = $this->getAccessToken();
         $url_data = [
             'access_token'=>$token,
@@ -156,8 +156,8 @@ class Factory
         if ($flag['errcode'] != 0) {
             throw new \Exception($flag['errmsg'], $flag['errcode']);
         }
-//        $cache = new FilesystemCache('cache');
-//        $cache->save("jsapi_ticket", $flag['ticket'], $flag['expires_in'] - 100);
+        $cache = new FilesystemCache('cache');
+        $cache->save("jsapi_ticket", $flag['ticket'], $flag['expires_in'] - 100);
 
         return $flag['ticket'];
     }

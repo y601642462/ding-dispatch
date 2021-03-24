@@ -110,9 +110,9 @@ class Api extends Factory
             'access_token' => $this->getAccessToken(),
         ];
         $msg_arr = [
-            "msgtype"=>"text",
-            "text"=>[
-                "content"=>$message
+            "msgtype" => "text",
+            "text" => [
+                "content" => $message
             ]
         ];
         $post_data = [
@@ -120,7 +120,7 @@ class Api extends Factory
             'userid_list' => $userid_list,
             'msg' => $msg_arr
         ];
-        
+
         return $this->request("/topapi/message/corpconversation/asyncsend_v2" . $this->make_url_query($get_data), $post_data, "post");
     }
 
@@ -145,5 +145,34 @@ class Api extends Factory
             'signature' => $signature,
             'url' => $url
         ];
+    }
+
+    /**
+     * 获取用户发出的日志列表
+     * @param $start_time@开始时间戳
+     * @param $end_time@结束时间戳
+     * @param $cursor@游标
+     * @param string $template_name@模板名称
+     * @param string $user_id@用户
+     * @return false|string
+     * @throws \Exception
+     */
+    public function reportList($start_time, $end_time, $cursor, $template_name = '', $user_id = '')
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'start_time' => $start_time,
+            'end_time' => $end_time,
+            'cursor' => $cursor,
+            'size' => 20,
+        ];
+        if ($template_name) {
+            $data['template_name'] = $template_name;
+        }
+        if ($user_id) {
+            $data['userid'] = $user_id;
+        }
+
+        return $this->request("topapi/report/list" . $this->make_url_query($data));
     }
 }

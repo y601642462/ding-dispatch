@@ -98,6 +98,32 @@ class Api extends Factory
     }
 
     /**
+     * 获取部门用户详情
+     * @param $department_id
+     * @param null $offset
+     * @param null $size
+     * @param null $order
+     * @return false|string
+     * @throws \Exception
+     */
+    public function getDetailedUsers($department_id,$offset = null, $size = null, $order = null)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'department_id' => $department_id,
+        ];
+        if ($offset && $size) {
+            $data['offset'] = $offset;
+            $data['size'] = $size;
+        }
+        if ($order) {
+            $data['order'] = $order;
+        }
+
+        return $this->request("user/listbypage" . $this->make_url_query($data));
+    }
+
+    /**
      * 发送工作通知消息
      * @param $userid_list
      * @param $memssage

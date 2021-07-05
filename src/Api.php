@@ -186,7 +186,7 @@ class Api extends Factory
     {
         $data = [
             'access_token' => $this->getAccessToken(),
-            'department_id' => $department_id,
+            'id' => $department_id,
         ];
 
         return $this->request("department/list_ids" . $this->make_url_query($data));

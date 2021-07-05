@@ -207,4 +207,20 @@ class Api extends Factory
 
         return $this->request("department/get" . $this->make_url_query($data));
     }
+
+    /**
+     * 获取部门中所有用户id
+     * @param $department_id
+     * @return false|string
+     * @throws \Exception
+     */
+    public function getDepartmentUserids($department_id)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'deptId' => $department_id,
+        ];
+
+        return $this->request("user/getDeptMember" . $this->make_url_query($data));
+    }
 }

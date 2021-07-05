@@ -175,4 +175,20 @@ class Api extends Factory
 
         return $this->request("topapi/report/list" . $this->make_url_query($data));
     }
+
+    /**
+     * 获取子部门ID
+     * @param $department_id
+     * @return false|string
+     * @throws \Exception
+     */
+    public function departmentListIds($department_id)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'department_id' => $department_id,
+        ];
+
+        return $this->request("department/list_ids" . $this->make_url_query($data));
+    }
 }

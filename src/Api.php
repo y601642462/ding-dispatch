@@ -249,4 +249,22 @@ class Api extends Factory
 
         return $this->request("user/getDeptMember" . $this->make_url_query($data));
     }
+
+    /**
+     * 获取指定用户日志模板
+     * @param $userid
+     * @param $template_name
+     * @return false|string
+     * @throws \Exception
+     */
+    public function getTemplate($userid,$template_name)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'userid' => $userid,
+            'template_name' => $template_name,
+        ];
+
+        return $this->request("topapi/report/template/getbyname" . $this->make_url_query($data));
+    }
 }

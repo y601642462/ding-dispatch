@@ -290,8 +290,8 @@ class Api extends Factory
      * 获取JSAPI鉴权配置
      * @return array
      */
-    public function jsapiInfo()
+    public function jsapiInfo($url)
     {
-        return $this->h5Config();
+        return $this->h5Config($url);
     }
 }

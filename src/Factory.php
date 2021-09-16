@@ -207,15 +207,18 @@ class Factory
      * JSAPI鉴权配置
      * @return array
      */
-    protected function h5Config()
+    protected function h5Config($url)
     {
         $nonce_str = $this->getSuiteTicket();
+        $timeStamp = $this->timestamp;
+        $plain = 'jsapi_ticket=' . $this->getTicket() . '&noncestr=' . $nonce_str . '&timestamp=' . $timeStamp . '&url=' . $url;
+        $signature = sha1($plain);
         $data = [
             'agentId'=> $this->config['agent_id'],
             'corpId'=> $this->config['auth_corpid'],
-            'timeStamp'=> $this->timestamp,
+            'timeStamp'=> $timeStamp,
             'nonceStr'=> $nonce_str,
-            'signature'=>$this->getSignature($nonce_str),
+            'signature'=>$signature,
         ];
 
         return $data;

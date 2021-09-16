@@ -285,4 +285,13 @@ class Api extends Factory
 
         return $this->request("topapi/extcontact/list" . $this->make_url_query($data));
     }
+
+    /**
+     * 获取JSAPI鉴权配置
+     * @return array
+     */
+    public function jsapiInfo()
+    {
+        return $this->h5Config();
+    }
 }

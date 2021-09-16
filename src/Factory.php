@@ -202,4 +202,22 @@ class Factory
 
         return $flag;
     }
+
+    /**
+     * JSAPI鉴权配置
+     * @return array
+     */
+    protected function h5Config()
+    {
+        $nonce_str = $this->getSuiteTicket();
+        $data = [
+            'agentId'=> $this->config['agent_id'],
+            'corpId'=> $this->config['corp_id'],
+            'timeStamp'=> $this->timestamp,
+            'nonceStr'=> $nonce_str,
+            'signature'=>$this->getSignature($nonce_str),
+        ];
+
+        return $data;
+    }
 }

@@ -267,4 +267,22 @@ class Api extends Factory
 
         return $this->request("topapi/report/template/getbyname" . $this->make_url_query($data));
     }
+
+    /**
+     * 获取外部联系人列表
+     * @param int $offset
+     * @param int $size
+     * @return false|string
+     * @throws \Exception
+     */
+    public function extcontactList($offset=0,$size=20)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'size' => $size,
+            'offset' => $offset,
+        ];
+
+        return $this->request("topapi/extcontact/list" . $this->make_url_query($data));
+    }
 }

@@ -212,7 +212,7 @@ class Factory
         $nonce_str = $this->getSuiteTicket();
         $data = [
             'agentId'=> $this->config['agent_id'],
-            'corpId'=> $this->config['corp_id'],
+            'corpId'=> $this->config['auth_corpid'],
             'timeStamp'=> $this->timestamp,
             'nonceStr'=> $nonce_str,
             'signature'=>$this->getSignature($nonce_str),

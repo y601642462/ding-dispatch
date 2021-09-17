@@ -323,7 +323,7 @@ class Api extends Factory
             'tmp_auth_code' => $code,
         ];
 
-        return $this->request("sns/getuserinfo_bycode" . $this->make_url_query($data));
+        return $this->request("sns/getuserinfo_bycode" . $this->make_url_query($data),'post');
     }
 
     /**

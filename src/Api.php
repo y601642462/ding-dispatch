@@ -294,4 +294,49 @@ class Api extends Factory
     {
         return $this->h5Config($url);
     }
+
+    /**
+     * 钉钉内免登第三方网站
+     * @param $app_id
+     * @param $callback
+     * @return string
+     */
+    public function qrcodeUrl($app_id,$callback)
+    {
+        $url = "https://oapi.dingtalk.com/connect/qrconnect?appid={$app_id}&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=".urlencode($callback);
+
+        return $url;
+    }
+
+    /**
+     * 通过免登码获取用户信息
+     * @param $code
+     * @return false|string
+     * @throws \Exception
+     */
+    public function getUserInfoByCode($code)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'code' => $code,
+        ];
+
+        return $this->request("topapi/v2/user/getuserinfo" . $this->make_url_query($data));
+    }
+
+    /**
+     * 根据unionid获取用户userid
+     * @param $unionid
+     * @return false|string
+     * @throws \Exception
+     */
+    public function getByUnionid($unionid)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'unionid' => $unionid,
+        ];
+
+        return $this->request("topapi/user/getbyunionid" . $this->make_url_query($data));
+    }
 }

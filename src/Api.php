@@ -317,11 +317,13 @@ class Api extends Factory
     public function getUserInfoByCode($code)
     {
         $data = [
-            'access_token' => $this->getAccessToken(),
-            'code' => $code,
+            'accessKey' => $this->getConfig()['customKey'],
+            'timestamp' => $this->getTimestamp(),
+            'signature' => $this->getSign(),
+            'tmp_auth_code' => $code,
         ];
 
-        return $this->request("topapi/v2/user/getuserinfo" . $this->make_url_query($data));
+        return $this->request("sns/getuserinfo_bycode" . $this->make_url_query($data));
     }
 
     /**

@@ -223,4 +223,27 @@ class Factory
 
         return $data;
     }
+
+    /**
+     * 获取当前时间戳
+     * @return float
+     */
+    protected function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    /**
+     * 扫码登录获取签名
+     * @return string
+     */
+    protected function getSign()
+    {
+        $custom_secret = $this->config['customKey'];
+        $signature = $this->timestamp;
+        $sign = hash_hmac('sha256', $signature, $custom_secret, true);
+        $signature = base64_encode($sign);
+
+        return $signature;
+    }
 }

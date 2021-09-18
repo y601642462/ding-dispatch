@@ -239,7 +239,7 @@ class Factory
      */
     protected function getSign()
     {
-        $custom_secret = $this->config['customSecret'];
+        $custom_secret = $this->config['appSecret'];
         $signature = $this->timestamp;
         $sign = hash_hmac('sha256', $signature, $custom_secret, true);
         $signature = base64_encode($sign);

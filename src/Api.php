@@ -317,7 +317,7 @@ class Api extends Factory
     public function getUserInfoByCode($code)
     {
         $data = [
-            'accessKey' => $this->getConfig()['customKey'],
+            'accessKey' => $this->getConfig()['app_id'],
             'timestamp' => $this->getTimestamp(),
             'signature' => $this->getSign(),
         ];

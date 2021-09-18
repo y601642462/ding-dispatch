@@ -320,10 +320,12 @@ class Api extends Factory
             'accessKey' => $this->getConfig()['customKey'],
             'timestamp' => $this->getTimestamp(),
             'signature' => $this->getSign(),
+        ];
+        $post_data = [
             'tmp_auth_code' => $code,
         ];
 
-        return $this->request("sns/getuserinfo_bycode",$data,'post');
+        return $this->request("sns/getuserinfo_bycode". $this->make_url_query($data),$post_data,'post');
     }
 
     /**

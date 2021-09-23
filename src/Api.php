@@ -111,11 +111,9 @@ class Api extends Factory
         $data = [
             'access_token' => $this->getAccessToken(),
             'department_id' => $department_id,
+            'offset' => $offset,
+            'size' => $size,
         ];
-        if ($offset && $size) {
-            $data['offset'] = $offset;
-            $data['size'] = $size;
-        }
         if ($order) {
             $data['order'] = $order;
         }

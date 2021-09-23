@@ -80,7 +80,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    public function userSimplelist($department_id, $offset = null, $size = null, $order = null)
+    public function userSimplelist($department_id, $offset = 0, $size = 100, $order = null)
     {
         $data = [
             'access_token' => $this->getAccessToken(),
@@ -106,7 +106,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    public function getDetailedUsers($department_id,$offset = null, $size = null, $order = null)
+    public function getDetailedUsers($department_id,$offset = 0, $size = 100, $order = null)
     {
         $data = [
             'access_token' => $this->getAccessToken(),

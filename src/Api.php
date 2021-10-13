@@ -131,12 +131,16 @@ class Api extends Factory
         $get_data = [
             'access_token' => $this->getAccessToken(),
         ];
-        $msg_arr = [
-            "msgtype" => "text",
-            "text" => [
-                "content" => $message
-            ]
-        ];
+        if (is_array($message)){
+            $msg_arr = $message;
+        }else{
+            $msg_arr = [
+                "msgtype" => "text",
+                "text" => [
+                    "content" => $message
+                ]
+            ];
+        }
         $post_data = [
             'agent_id' => $this->getConfig()['agent_id'],
             'userid_list' => $userid_list,

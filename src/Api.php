@@ -343,4 +343,32 @@ class Api extends Factory
 
         return $this->request("topapi/user/getbyunionid" . $this->make_url_query($data));
     }
+
+    /**
+     * 上传媒体文件
+     * @param $type
+     * @param $media
+     * @return false|string
+     * @throws \Exception
+     */
+    public function uploadMedia($type,$media)
+    {
+        $data = [
+            'access_token' => $this->getAccessToken(),
+            'type' => $type,
+            'media'=>$media,
+        ];
+
+        return $this->request("media/upload" . $this->make_url_query($data));
+    }
+
+    /**
+     * 获取accessToken
+     * @return false|mixed|string
+     * @throws \Exception
+     */
+    public function getToken()
+    {
+        return $this->getAccessToken();
+    }
 }

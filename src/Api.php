@@ -359,7 +359,7 @@ class Api extends Factory
             'media'=>$media,
         ];
 
-        return $this->request("media/upload" . $this->make_url_query($data));
+        return $this->request("media/upload" . $this->make_url_query($data),[],'post');
     }
 
     /**

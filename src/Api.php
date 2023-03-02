@@ -345,24 +345,6 @@ class Api extends Factory
     }
 
     /**
-     * 上传媒体文件
-     * @param $type
-     * @param $media
-     * @return false|string
-     * @throws \Exception
-     */
-    public function uploadMedia($type,$media)
-    {
-        $data = [
-            'access_token' => $this->getAccessToken(),
-            'type' => $type,
-            'media'=>$media,
-        ];
-
-        return $this->request("media/upload",$data,'post');
-    }
-
-    /**
      * 获取accessToken
      * @return false|mixed|string
      * @throws \Exception

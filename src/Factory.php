@@ -131,7 +131,7 @@ class Factory
             throw new \Exception($flag['errmsg'], $flag['errcode']);
         }
         $cache = new FilesystemCache('cache');
-        $cache->save("access_token", $flag['access_token'], $flag['expires_in'] - 100);
+        $cache->save("access_token", $flag['access_token'], $flag['expires_in'] - 1000);
 
         return $flag['access_token'];
     }

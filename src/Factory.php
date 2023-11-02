@@ -113,7 +113,7 @@ class Factory
      */
     protected function getAccessToken()
     {
-        $access_token = $this->get_cache("access_token");
+        $access_token = $this->get_cache("access_token".$this->config['customKey']);
         if ($access_token) {
             return $access_token;
         }
@@ -131,7 +131,7 @@ class Factory
             throw new \Exception($flag['errmsg'], $flag['errcode']);
         }
         $cache = new FilesystemCache('cache');
-        $cache->save("access_token", $flag['access_token'], $flag['expires_in'] - 1000);
+        $cache->save("access_token".$url_data['accessKey'], $flag['access_token'], 7200);
 
         return $flag['access_token'];
     }
@@ -143,21 +143,21 @@ class Factory
      */
     protected function getTicket()
     {
-        $jsapi_ticket = $this->get_cache("jsapi_ticket");
-        if ($jsapi_ticket) {
-            return $jsapi_ticket;
-        }
         $token = $this->getAccessToken();
         $url_data = [
             'access_token'=>$token,
         ];
+        $jsapi_ticket = $this->get_cache("jsapi_ticket".$url_data['access_token']);
+        if ($jsapi_ticket) {
+            return $jsapi_ticket;
+        }
         $res = $this->make_url_query($url_data);
         $flag = $this->request('get_jsapi_ticket' . $res);
         if ($flag['errcode'] != 0) {
             throw new \Exception($flag['errmsg'], $flag['errcode']);
         }
         $cache = new FilesystemCache('cache');
-        $cache->save("jsapi_ticket", $flag['ticket'], $flag['expires_in'] - 100);
+        $cache->save("jsapi_ticket".$url_data['access_token'], $flag['ticket'], 7200);
 
         return $flag['ticket'];
     }

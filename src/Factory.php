@@ -147,17 +147,17 @@ class Factory
         $url_data = [
             'access_token'=>$token,
         ];
-        $jsapi_ticket = $this->get_cache("jsapi_ticket".$url_data['access_token']);
-        if ($jsapi_ticket) {
-            return $jsapi_ticket;
-        }
+//        $jsapi_ticket = $this->get_cache("jsapi_ticket".$url_data['access_token']);
+//        if ($jsapi_ticket) {
+//            return $jsapi_ticket;
+//        }
         $res = $this->make_url_query($url_data);
         $flag = $this->request('get_jsapi_ticket' . $res);
         if ($flag['errcode'] != 0) {
             throw new \Exception($flag['errmsg'], $flag['errcode']);
         }
-        $cache = new FilesystemCache('cache');
-        $cache->save("jsapi_ticket".$url_data['access_token'], $flag['ticket'], 7200);
+//        $cache = new FilesystemCache('cache');
+//        $cache->save("jsapi_ticket".$url_data['access_token'], $flag['ticket'], 7200);
 
         return $flag['ticket'];
     }

@@ -183,7 +183,7 @@ class Api extends Factory
      * @return false|string
      * @throws \Exception
      */
-    public function reportList($start_time, $end_time, $cursor, $template_name = '', $user_id = '')
+    public function reportList($start_time, $end_time, $cursor, $template_name = '', $user_id = '',$modified_start_time = '',$modified_end_time='')
     {
         $data = [
             'access_token' => $this->getAccessToken(),
@@ -197,6 +197,12 @@ class Api extends Factory
         }
         if ($user_id) {
             $data['userid'] = $user_id;
+        }
+        if ($modified_start_time){
+            $data['modified_start_time'] = $modified_start_time;
+        }
+        if ($modified_end_time){
+            $data['modified_end_time'] = $modified_end_time;
         }
 
         return $this->request("topapi/report/list" . $this->make_url_query($data));
